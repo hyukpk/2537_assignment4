@@ -45,7 +45,7 @@ const setUpGameGrid = (gameLevel, pokemons) => {
     if (gameLevel === "easy") {
         pairCount = 3;
         pairsLeft = 3;
-        totaltime = 70;
+        totaltime = 5;
     } else if (gameLevel === "medium") {
         pairCount = 4;
         pairsLeft = 4;
@@ -149,8 +149,8 @@ const startStats = () => {
     timerInterval = setInterval(updateTimer, 1000);
 };
 
-let firstCard = null; // Store the first clicked card
-let secondCard = null; // Store the second clicked card
+let firstCard = null; 
+let secondCard = null; 
 let imageID1a = null;
 let imageID1b = null;
 let imageID2a = null;
@@ -178,15 +178,21 @@ const handleGameLogic = (event) => {
         return;
     }
 
-    $(currentCard).toggleClass("flip");
+    
 
     if (!firstCard) {
+        $(currentCard).toggleClass("flip");
         console.log("first card is clicked");
         // First card clicked
         firstCard = frontFaceImg;
         totalClicks++;
         console.log(firstCard.id);
+    } else if (firstCard.id === frontFaceImg.id){
+        console.log("should cancel")
+        return 
     } else {
+        $(currentCard).toggleClass("flip");
+        
         console.log("second card is clicked");
         // Second card clicked
         secondCard = frontFaceImg;
@@ -249,24 +255,36 @@ const handleGameLogic = (event) => {
 const changeBackGroundColor = (checked) => {
     if (checked) {
         $("body").css({
-            "background-color": "black",
+            "background-color": "black"
         });
         $("#game-grid").css({
-            "background-color": "black",
+            "background-color": "black"
         });
         $(".card").css({
-            "background-color": "black",
+            "background-color": "black"
         });
+        $("#stats").css({
+            "color": "white"
+        })
+        $(".form-check-label").css({
+            "color": "white"
+        })
     } else {
         $("body").css({
-            "background-color": "white",
+            "background-color": "white"
         });
         $("#game-grid").css({
-            "background-color": "white",
+            "background-color": "white"
         });
         $(".card").css({
-            "background-color": "white",
+            "background-color": "white"
         });
+        $("#stats").css({
+            "color": "black"
+        })
+        $(".form-check-label").css({
+            "color": "black"
+        })
     }
 };
 
